@@ -7,13 +7,13 @@ const app = express();
 const PORT = process.env.PORT || 3000; // ✅ Render assigns PORT dynamically
 app.use(cors());
 
-const TARGET_URL = "https://in.bookmyshow.com/events/travis-scott-circus-maximus-stadium-tour-india/ET00439284"; // Replace with the actual event page URL
+const TARGET_URL = "https://in.bookmyshow.com/events/travis-scott-circus-maximus-stadium-tour-india/ET00439284"; // Replace with actual event page
 
 const ticketKeywords = [
   "buy now", "book now", "book tickets", "buy tickets", "get tickets"
 ];
 
-// ✅ Corrected `checkTickets` function
+// ✅ Fixed `checkTickets` function
 async function checkTickets() {
   try {
     const { data } = await axios.get(TARGET_URL, {
@@ -29,7 +29,7 @@ async function checkTickets() {
 
     const found = ticketKeywords.some(keyword => pageText.includes(keyword));
 
-return { available: true }; // ✅ Fake ticket drop for testing
+    return { available: found }; // ✅ Now correctly returns ticket status
   } catch (error) {
     console.error("❌ Scraping failed:", error.response ? error.response.status : error.message);
     return { available: false };
@@ -38,14 +38,14 @@ return { available: true }; // ✅ Fake ticket drop for testing
 
 // ✅ Root route (confirms backend is running)
 app.get("/", (req, res) => {
-    res.send("Backend is live! Use /check-tickets to check availability.");
+  res.send("Backend is live! Use /check-tickets to check availability.");
 });
 
 // ✅ Ticket checking route
 app.get("/check-tickets", async (req, res) => {
   try {
-    const ticketsAvailable = await checkTickets();  // This function should return true/false
-    res.json({ available: ticketsAvailable });
+    const ticketsAvailable = await checkTickets(); // ✅ Fixed response structure
+    res.json(ticketsAvailable); // ✅ No extra nesting in JSON
   } catch (error) {
     console.error("Error checking tickets:", error);
     res.status(500).json({ error: "Internal server error" });

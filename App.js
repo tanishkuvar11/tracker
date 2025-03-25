@@ -6,7 +6,7 @@ import * as BackgroundFetch from "expo-background-fetch";
 import * as TaskManager from "expo-task-manager";
 import { Audio } from "expo-av";
 
-const BACKEND_URL = "https://tracker-aood.onrender.com"; // Your Render URL
+const BACKEND_URL = "https://tracker-aood.onrender.com"; // ✅ Your Render URL
 const TASK_NAME = "CHECK_TICKETS_TASK";
 
 // ✅ Set Notification Handler
@@ -123,12 +123,11 @@ export default function App() {
   }, []);
 
   return (
-  <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#000" }}>
-    <Text style={{ fontSize: 20, fontWeight: "bold", color: "#fff", marginBottom: 20 }}>
-      {ticketAvailable ? "🎟 Tickets Available!" : "No Tickets Yet"}
-    </Text>
-    <Button title="Check Now" onPress={() => checkForTicketDrop(setTicketAvailable)} />
-  </View>
-);
-
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#000" }}>
+      <Text style={{ fontSize: 20, fontWeight: "bold", color: "#fff", marginBottom: 20 }}>
+        {ticketAvailable ? "🎟 Tickets Available!" : "No Tickets Yet"}
+      </Text>
+      <Button title="Check Now" onPress={() => checkForTicketDrop(setTicketAvailable)} />
+    </View>
+  );
 }
