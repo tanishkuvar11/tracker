@@ -43,8 +43,13 @@ app.get("/", (req, res) => {
 
 // ✅ Ticket checking route
 app.get("/check-tickets", async (req, res) => {
-  const result = await checkTickets();
-  res.json(result);
+  try {
+    const ticketsAvailable = await checkTickets();  // This function should return true/false
+    res.json({ available: ticketsAvailable });
+  } catch (error) {
+    console.error("Error checking tickets:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 // ✅ Start the server
