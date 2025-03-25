@@ -4,7 +4,7 @@ import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import { Audio } from "expo-av";
 
-const BACKEND_URL = "http://172.20.10.2:3000/check-tickets"; // Replace with your actual local IP
+const BACKEND_URL = "https://tracker-aood.onrender.com";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

@@ -4,7 +4,7 @@ const cheerio = require("cheerio");
 const cors = require("cors");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 const TARGET_URL = "https://in.bookmyshow.com/events/travis-scott-circus-maximus-stadium-tour-india/ET00439284"; // Replace with the actual event page URL
@@ -34,9 +34,16 @@ async function checkTickets() {
   }
 }
 
+// **✅ Add a root route to confirm the backend is working**
+app.get("/", (req, res) => {
+    res.send("Backend is live! Use /check-tickets to check availability.");
+});
+
+// **✅ Ticket checking route**
 app.get("/check-tickets", async (req, res) => {
   const result = await checkTickets();
   res.json(result);
 });
 
+// **✅ Start the server**
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
