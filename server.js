@@ -4,7 +4,7 @@ const cheerio = require("cheerio");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // ✅ Render assigns PORT dynamically
 app.use(cors());
 
 const TARGET_URL = "https://in.bookmyshow.com/events/travis-scott-circus-maximus-stadium-tour-india/ET00439284"; // Replace with the actual event page URL
